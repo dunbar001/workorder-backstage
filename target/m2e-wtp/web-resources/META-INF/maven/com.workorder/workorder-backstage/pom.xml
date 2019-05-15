@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<!-- 集中定义依赖版本号 -->
+	<!-- 集中定义依赖版本号 辉哥在吗-->
 	<properties>
 		<junit.version>4.12</junit.version>
 		<spring.version>4.2.4.RELEASE</spring.version>
