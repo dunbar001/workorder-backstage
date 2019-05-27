@@ -1,138 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-	<link rel="shortcut icon" href="favicon.ico"> 
-    <link href="../../../css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="../../../css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-     <!-- Data Tables -->
-    <link href="../../../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-	<link href="../../../css/laydate.css" rel="stylesheet">
-    <link href="../../../css/animate.min.css" rel="stylesheet">
-    <link href="../../../css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="../../../css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="../../../css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<!-- Data Tables -->
+<link href="../../../css/plugins/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet">
+<link href="../../../css/laydate.css" rel="stylesheet">
+<link href="../../../css/animate.min.css" rel="stylesheet">
+<link href="../../../css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="../../../css/app.css" rel="stylesheet">
+<base target="_blank">
 </head>
-<body class="gray-bg">
+<body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
-			<div class="col-sm-12">
-                <h1>检测报告</h1>
-           	</div>
-           	<div class="col-sm-12">
-                  <table class="table table-bordered">
-                      <tbody>
-                          <tr>
-                              <td>送检单位</td>
-                              <td></td>
-                              <td>送检人</td>
-                              <td></td>
-                          </tr>
-                          <tr>
-                              <td>送检样品</td>
-                              <td></td>
-                              <td>样品数量</td>
-                              <td></td>
-                          </tr>
-                          <tr>
-                              <td>送检日期</td>
-                              <td></td>
-                              <td>检测日期</td>
-                              <td></td>
-                          </tr>
-                      </tbody>
-                  </table>
-           	</div>
-           	<div class="col-sm-12">
-                  <table class="table table-bordered">
-                 	  <thead>
-               	  		<tr>
-               	  			<th>检测项目</th>
-               	  			<th>试剂来源</th>
-               	  			<th>检测方法</th>
-               	  			<th>检测结果</th>
-               	  		</tr>
-                 	  </thead>
-                      <tbody>
-                          <tr>
-                              <td>AC病毒</td>
-                              <td></td>
-                              <td>q-PCR</td>
-                              <td>检测     4 份：
+			<div class="content-body">
+				<div class="col-sm-12 check-title">
+					<h1>检测报告</h1>
+					<button class="btn btn-w-m btn-primary">打印</button>
+				</div>
+				<div class="col-sm-12">
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td width="25%">送检单位</td>
+								<td></td>
+								<td width="25%">送检人</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>送检样品</td>
+								<td></td>
+								<td>样品数量</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>送检日期</td>
+								<td></td>
+								<td>检测日期</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-12">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th width="25%">检测项目</th>
+								<th width="25%">试剂来源</th>
+								<th width="25%">检测方法</th>
+								<th width="25%">检测结果</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>AC病毒</td>
+								<td></td>
+								<td>q-PCR</td>
+								<td>
+									<table>
+										<tbody >
+											<tr>
+												<td rowspan="5">检测     4 份：</td>
+												<td>强阳性：2份</td>
+											</tr>
+											<tr>
+												<td>阳性：0份</td>
+											</tr>
+											<tr>
+												<td>弱阳性：0份</td>
+											</tr>
+											<tr>
+												<td>可疑：2份</td>
+											</tr>
+											<tr>
+												<td>阴性：2份</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-12 mark-padding">
+					<p>
+					<span>样品处理人：</span>
+					<p>
+					<span>核算提取人：</span>
+					</p>
+					<p>
+					<span>qPCR扩增人：</span>
+					</p>
+					<div class="col-sm-9"></div>
+					<div class="col-sm-2">
+						<p>
+						<span>联系电话：</span>
+						</p>
+						<p>
+						<span>日期：</span>
+						</p>
+					</div>
+				</div>
+			</div>
 
-								强阳性：  2 份
-								
-								阳   性：  0 份
-								
-								弱阳性：  0 份
-								
-								可   疑：  0 份
-								
-								阴   性：  2 份</td>
-                          </tr>
-                      </tbody>
-                  </table>
-           	</div>
-           	<div class="col-sm-12">
-                  <p>
-                  	<h4>样品处理人：</h4>
-                  </p>
-                  <p>
-                  	<h4>核算提取人：</h4>
-                  </p>
-                  <p>
-                  	<h4>qPCR扩增人：</h4>
-                  </p>
-                   <p>
-                  	<h4>联系电话：</h4>
-                  </p>
-                   <p>
-                  	<h4>日期：</h4>
-                  </p>
-           	</div>
-           	<div class="col-sm-12">
-           		<div class="panel panel-primary">
-                     <div class="panel-heading">
-                   		样品信息：样品数量  N
-                     </div>
-                     <div class="panel-body">
-                         <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>样品编号</th>
-                                    <th>样品大类/小类</th>
-                                    <th>样品信息</th>
-                                    <th>送检人</th>
-                                    <th>样品检测结果</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td></td>
-                                    <td>人/试子</td>
-                                    <td>姓名/耳号/环境</td>
-                                    <td></td>
-                                    <td>检测人：阳性
-                                    	<a class="btn btn-sm btn-primary" href="javascript:void(0)">修改</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td>猪/血液</td>
-                                    <td>栋号/栏位/群别/胎次/配种日期/症状/体温/接种疫苗/接种日期</td>
-                                    <td></td>
-                                    <td>检测中：
-                                    	<a class="btn btn-sm btn-primary" href="javascript:void(0)">修改</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                     </div>
-                 </div>
-           	</div>
+			<div class="col-sm-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">样品信息：样品数量 N</div>
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>样品编号</th>
+									<th>样品大类/小类</th>
+									<th>样品信息</th>
+									<th>送检人</th>
+									<th>样品检测结果</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td>人/试子</td>
+									<td>姓名/耳号/环境</td>
+									<td></td>
+									<td>检测人：阳性 <a class="btn btn-sm btn-primary"
+										href="javascript:void(0)">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td></td>
+									<td>猪/血液</td>
+									<td>栋号/栏位/群别/胎次/配种日期/症状/体温/接种疫苗/接种日期</td>
+									<td></td>
+									<td>检测中： <a class="btn btn-sm btn-primary"
+										href="javascript:void(0)">修改</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

@@ -1,0 +1,29 @@
+.content-body{
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+}
+.check-title{
+	text-align:center;
+	margin-bottom:20px;
+	position:relation;
+}
+.check-title button{
+	position:absolute;
+	right:0;
+	top:0;
+}
+.check-title h1{
+	font-weight:bolder;
+	font-family:'黑体';
+	color:#333;
+}
+.mark-padding p{
+	padding:10px 0; 
+}
+.mark-padding p span{
+	font-weight:bolder;
+	font-family:'黑体';
+	color:#333;
+	font-size:18px;
+}
