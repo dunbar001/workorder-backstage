@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<http pattern="/css/**" security="none"></http>
+	<http pattern="/img/**" security="none"></http>
+	<http pattern="/js/**" security="none"></http>
+	<http pattern="/plugins/**" security="none"></http>
+	<http pattern="/fonts/**" security="none"></http>
+	<http pattern="/html/**" security="none"></http>
+	<http pattern="/login.html" security="none"></http>
+
+	<http use-expressions="false">
+		<custom-filter after="LAST" ref="dynamicallyUrlInterceptor"/>
+		<form-login login-page="/login.html" default-target-url="/index.html" password-parameter="pwd" username-parameter="username"/>
+		<logout logout-success-url="/login.html"/>
+		<csrf disabled="true"/>
+	</http>
+	
+	<authentication-manager>
+		<authentication-provider user-service-ref="userService">
+			<password-encoder hash="md5"></password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+	<beans:bean id="userService" class="com.workorder.security.service.UserService"></beans:bean>
+	 <beans:bean id="dynamicallyUrlInterceptor" class="com.workorder.filter.DynamicallyUrlInterceptor">
+		<beans:property name="securityMetadataSource" ref="securityMetadataSource"></beans:property>
+		<beans:property name="accessDecisionManager" ref="accessDecisionManager"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="securityMetadataSource" class="com.workorder.filter.MyFilterSecurityMetadataSource"></beans:bean>
+	<beans:bean id="accessDecisionManager" class="com.workorder.filter.MyAccessDecisionManager"></beans:bean>
+</beans:beans>
