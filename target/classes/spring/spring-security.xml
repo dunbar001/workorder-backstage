@@ -14,9 +14,12 @@
 
 	<http use-expressions="false">
 		<custom-filter after="LAST" ref="dynamicallyUrlInterceptor"/>
-		<form-login login-page="/login.html" default-target-url="/index.html" password-parameter="pwd" username-parameter="username"/>
+		<form-login login-page="/login.html" authentication-success-forward-url="/index.html" default-target-url="/index.html" password-parameter="pwd" username-parameter="username"/>
 		<logout logout-success-url="/login.html"/>
 		<csrf disabled="true"/>
+		<headers>
+			<frame-options policy="SAMEORIGIN"/>
+		</headers>
 	</http>
 	
 	<authentication-manager>

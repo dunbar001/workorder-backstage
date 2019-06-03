@@ -13,6 +13,11 @@
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min.css" rel="stylesheet">
     <link href="css/login.min.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="js/base.js"></script>
+    <script type="text/javascript" src="js/controller/loginController.js"></script>
+    
     <!--[if lt IE 8]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -22,7 +27,7 @@
 
 </head>
 
-<body class="signin">
+<body ng-app="workorder" ng-controller="loginController" class="signin">
     <div class="signinpanel">
         <div class="row">
             <div class="col-sm-7">
@@ -46,6 +51,7 @@
                 <form method="post" action="/login">
                     <h4 class="no-margins">登录：</h4>
                     <p class="m-t-md">登录到H+后台主题UI框架</p>
+                    <p class="error" style="color:red">{{error}}</p>
                     <input type="text" name="username" class="form-control uname" placeholder="用户名" />
                     <input type="password" name="pwd" class="form-control pword m-b" placeholder="密码" />
                     <a href="">忘记密码了？</a>
