@@ -2,8 +2,6 @@ package com.workorder.mapper;
 
 import com.workorder.pojo.WoSysUser;
 import com.workorder.pojo.WoSysUserExample;
-import com.workorder.vo.V_WoUser;
-
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,5 +28,5 @@ public interface WoSysUserMapper {
 
     int updateByPrimaryKey(WoSysUser record);
     
-    V_WoUser findById(Integer id);
+    WoSysUser findById(Integer id);
 }

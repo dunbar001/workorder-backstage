@@ -1,7 +1,9 @@
 package com.workorder.service;
 
-import com.workorder.vo.V_WoRole;
+import java.util.List;
+
+import com.workorder.pojo.WoSysRole;
 
 public interface WoSysRoleService {
-	public V_WoRole findRoleListByUid(Integer uid);
+	public List<WoSysRole> findRoleListByUid(Integer uid);
 }

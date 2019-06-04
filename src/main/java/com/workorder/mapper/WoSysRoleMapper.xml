@@ -178,4 +178,8 @@
       key = #{key,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findRoleListByUid" parameterType="java.lang.Integer" resultType="com.workorder.pojo.WoSysRole">
+  	select wo_sys_role.* from wo_sys_role join wo_user_role on wo_sys_role.id=wo_user_role.rid where wo_user_role.uid = #{uid,jdbcType=INTEGER}
+  </select>
 </mapper>

@@ -13,28 +13,26 @@ import com.workorder.pojo.WoSysUserExample;
 import com.workorder.pojo.WoSysUserExample.Criteria;
 import com.workorder.service.WoSysUserService;
 import com.workorder.vo.V_Search_User;
-import com.workorder.vo.V_WoUser;
 
 @Service
 @Transactional
 public class WoSysUserServiceImpl implements WoSysUserService {
 
 	@Autowired
-	private WoSysUserMapper sysUserMapper;
+	private WoSysUserMapper woSysUserMapper;
 	
 	@Override
 	public WoSysUser findByUsername(String username) {
 		WoSysUserExample example = new WoSysUserExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andNameEqualTo(username);
-		List<WoSysUser> list = sysUserMapper.selectByExample(example);
+		List<WoSysUser> list = woSysUserMapper.selectByExample(example);
 		return list != null ? list.get(0) : null;
 	}
 
 	@Override
-	public V_WoUser findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public WoSysUser findById(Integer id) {
+		return woSysUserMapper.findById(id);
 	}
 
 	@Override

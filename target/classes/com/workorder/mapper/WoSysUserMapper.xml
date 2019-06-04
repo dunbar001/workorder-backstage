@@ -6,17 +6,8 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="pwd" property="pwd" jdbcType="VARCHAR" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
+    <association property="user" resultMap="com.workorder.mapper.WoUserMapper.BaseResultMap"></association>
   </resultMap>
-  	<resultMap type="com.workorder.vo.V_WoUser" id="VUserResultMap">
-	    <association property="sysUser" javaType="com.workorder.pojo.WoSysUser">
-	        <id property="id" column="id"/>
-	        <result property="name" column="name"/>
-	    </association>
-	    <association property="user" javaType="com.workorder.pojo.WoUser">
-	        <id property="id" column="id"/>
-	        <result property="name" column="nick_name"/>
-	    </association>
-	</resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -204,9 +195,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-
-  
-  <select id="findById" parameterType="java.lang.Integer" resultType="VUserResultMap">
+  <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   	select wo_sys_user.*,wo_user.* from wo_sys_user join wo_user on  wo_sys_user.id = wo_user.uid where wo_sys_user.id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

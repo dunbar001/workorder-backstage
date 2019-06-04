@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.workorder.mapper.WoSysUserMapper;
+import com.workorder.mapper.WoUserMapper;
 import com.workorder.pojo.WoSysUser;
+import com.workorder.pojo.WoUser;
 import com.workorder.service.WoSysUserService;
-import com.workorder.vo.V_WoUser;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring/applicationContext*.xml")
+@ContextConfiguration("classpath*:spring/applicationContext*.xml")
 public class WoSysUserServiceImplTest {
 
 	@Autowired
@@ -27,7 +29,7 @@ public class WoSysUserServiceImplTest {
 	
 	@Test
 	public void test1() {
-		V_WoUser user = woSysUserService.findById(1);
+		WoSysUser user = woSysUserService.findById(1);
 		System.out.println(user);
 	}
 }

@@ -8,6 +8,8 @@ public class WoSysUser {
     private String pwd;
 
     private Boolean enabled;
+    
+    private WoUser user;
 
     public Integer getId() {
         return id;
@@ -40,9 +42,18 @@ public class WoSysUser {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+    
+	public WoUser getUser() {
+		return user;
+	}
+
+	public void setUser(WoUser user) {
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {
-		return "WoSysUser [id=" + id + ", name=" + name + ", pwd=" + pwd + ", enabled=" + enabled + "]";
+		return "WoSysUser [id=" + id + ", name=" + name + ", pwd=" + pwd + ", enabled=" + enabled + ", user=" + user
+				+ "]";
 	}
 }

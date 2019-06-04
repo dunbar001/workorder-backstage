@@ -27,4 +27,6 @@ public interface WoSysRoleMapper {
     int updateByPrimaryKeySelective(WoSysRole record);
 
     int updateByPrimaryKey(WoSysRole record);
+    
+    List<WoSysRole> findRoleListByUid(Integer uid);
 }

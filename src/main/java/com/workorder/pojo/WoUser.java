@@ -112,4 +112,11 @@ public class WoUser {
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
     }
+
+	@Override
+	public String toString() {
+		return "WoUser [id=" + id + ", nickName=" + nickName + ", mobile=" + mobile + ", email=" + email + ", uid="
+				+ uid + ", address=" + address + ", createTime=" + createTime + ", age=" + age + ", gender=" + gender
+				+ ", position=" + position + ", deptId=" + deptId + "]";
+	}
 }

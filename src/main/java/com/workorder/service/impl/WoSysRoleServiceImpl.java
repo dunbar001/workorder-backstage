@@ -1,12 +1,14 @@
 package com.workorder.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.workorder.mapper.WoSysRoleMapper;
+import com.workorder.pojo.WoSysRole;
 import com.workorder.service.WoSysRoleService;
-import com.workorder.vo.V_WoRole;
 
 @Service
 @Transactional
@@ -14,10 +16,9 @@ public class WoSysRoleServiceImpl implements WoSysRoleService {
 
 	@Autowired
 	private WoSysRoleMapper sysRoleMapper;
-	
-	@Override
-	public V_WoRole findRoleListByUid(Integer uid) {
-		return null;
-	}
 
+	@Override
+	public List<WoSysRole> findRoleListByUid(Integer uid) {
+		return sysRoleMapper.findRoleListByUid(uid);
+	}
 }
