@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.aspectj.bridge.ILifecycleAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -16,16 +17,25 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 
+import com.workorder.pojo.WoSysRole;
+import com.workorder.service.WoSysRoleService;
+
 public class MyFilterSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
 	//private final Map<RequestMatcher, Collection<ConfigAttribute>> requestMap = new HashMap<RequestMatcher, Collection<ConfigAttribute>>();
-	
+	@Autowired
+	private WoSysRoleService woSysRoleService;
 
 	@Override
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
 		FilterInvocation fi = (FilterInvocation) object;
 		HttpServletRequest request = fi.getRequest();
-		
+		String uri = request.getRequestURI();
+		System.out.println(uri);
+		/*
+		 * List<WoSysRole> list = woSysRoleService.findRoleListByUrl(uri);
+		 * System.out.println(list);
+		 */
 		//根据当前访问的url从数据库获取所有的角色，如果为空，表示所有角色都可以访问
 		List<ConfigAttribute> configs = new ArrayList<ConfigAttribute>();
 		SecurityConfig config = new SecurityConfig("ROLE_ADMIN");

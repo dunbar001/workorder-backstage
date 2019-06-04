@@ -29,4 +29,6 @@ public interface WoSysRoleMapper {
     int updateByPrimaryKey(WoSysRole record);
     
     List<WoSysRole> findRoleListByUid(Integer uid);
+    
+    List<WoSysRole> findRoleListByUrl(String url);
 }

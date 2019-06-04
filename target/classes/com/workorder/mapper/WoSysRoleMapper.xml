@@ -182,4 +182,10 @@
   <select id="findRoleListByUid" parameterType="java.lang.Integer" resultType="com.workorder.pojo.WoSysRole">
   	select wo_sys_role.* from wo_sys_role join wo_user_role on wo_sys_role.id=wo_user_role.rid where wo_user_role.uid = #{uid,jdbcType=INTEGER}
   </select>
+  
+  <select id="findRoleListByUrl" parameterType="java.lang.String" resultType="com.workorder.pojo.WoSysRole">
+  	select * from wo_sys_role join wo_permission_role on wo_sys_role.id=wo_permission_role.rid join 
+  	wo_permission on wo_permission_role.permission_id=wo_permission.id
+  	where wo_permission.url=#{url,jdbcType=VARCHAR}
+  </select>
 </mapper>

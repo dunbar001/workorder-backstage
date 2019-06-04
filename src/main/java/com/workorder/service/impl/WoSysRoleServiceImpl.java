@@ -21,4 +21,10 @@ public class WoSysRoleServiceImpl implements WoSysRoleService {
 	public List<WoSysRole> findRoleListByUid(Integer uid) {
 		return sysRoleMapper.findRoleListByUid(uid);
 	}
+
+	@Override
+	public List<WoSysRole> findRoleListByUrl(String url) {
+		// TODO Auto-generated method stub
+		return sysRoleMapper.findRoleListByUrl(url);
+	}
 }

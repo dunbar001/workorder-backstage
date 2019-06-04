@@ -27,7 +27,8 @@ public class WoSysUserServiceImpl implements WoSysUserService {
 		Criteria criteria = example.createCriteria();
 		criteria.andNameEqualTo(username);
 		List<WoSysUser> list = woSysUserMapper.selectByExample(example);
-		return list != null ? list.get(0) : null;
+		System.out.println(list);
+		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 
 	@Override

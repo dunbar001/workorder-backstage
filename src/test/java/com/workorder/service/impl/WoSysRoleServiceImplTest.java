@@ -26,4 +26,9 @@ public class WoSysRoleServiceImplTest {
 		System.out.println(list.get(0).getKey());
 	}
 
+	@Test
+	public void test1() {
+		List<WoSysRole> list = woSysRoleService.findRoleListByUrl("/user/add.do");
+		System.out.println(list.get(0).getKey());
+	}
 }

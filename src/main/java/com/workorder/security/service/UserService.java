@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.workorder.pojo.WoSysRole;
 import com.workorder.pojo.WoSysUser;
@@ -21,7 +22,6 @@ import com.workorder.service.WoSysRoleService;
 import com.workorder.service.WoSysUserService;
 import com.workorder.util.MD5Util;
 
-@Component
 public class UserService implements UserDetailsService {
 
 	@Autowired
