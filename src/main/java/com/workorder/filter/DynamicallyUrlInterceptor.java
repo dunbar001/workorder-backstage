@@ -16,20 +16,20 @@ import org.springframework.security.access.intercept.AbstractSecurityInterceptor
 import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DynamicallyUrlInterceptor extends AbstractSecurityInterceptor implements Filter {
 
 	 //标记自定义的url拦截器已经加载
     private static final String FILTER_APPLIED = "__spring_security_filterSecurityInterceptor_filterApplied_dynamically";
     
+    @Autowired
 	private MyFilterSecurityMetadataSource securityMetadataSource;
-    
-	public void setSecurityMetadataSource(MyFilterSecurityMetadataSource securityMetadataSource) {
-		this.securityMetadataSource = securityMetadataSource;
-	}
 
-	public void setAccessDecisionManager(AccessDecisionManager accessDecisionManager) {
-		super.setAccessDecisionManager(accessDecisionManager);
+    @Autowired
+	public void setMyAccessDecisionManager(MyAccessDecisionManager myAccessDecisionManager) {
+		super.setAccessDecisionManager(myAccessDecisionManager);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class DynamicallyUrlInterceptor extends AbstractSecurityInterceptor imple
 	
 	 public void invoke(FilterInvocation fi) throws IOException, ServletException {
 
-	        if ((fi.getRequest() != null)
+	        /*if ((fi.getRequest() != null)
 	                && (fi.getRequest().getAttribute(FILTER_APPLIED) != null)
 	                ) {
 	            // filter already applied to this request and user wants us to observe
@@ -70,7 +70,17 @@ public class DynamicallyUrlInterceptor extends AbstractSecurityInterceptor imple
 	            }
 
 	            super.afterInvocation(token, null);
-	        }
+	        }*/
+	        InterceptorStatusToken token = super.beforeInvocation(fi);
+
+            try {
+                fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+            }
+            finally {
+                super.finallyInvocation(token);
+            }
+
+            super.afterInvocation(token, null);
 	    }
 
 	@Override

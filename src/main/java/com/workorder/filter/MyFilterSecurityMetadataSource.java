@@ -16,10 +16,12 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.workorder.pojo.WoSysRole;
 import com.workorder.service.WoSysRoleService;
 
+@Service
 public class MyFilterSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
 	//private final Map<RequestMatcher, Collection<ConfigAttribute>> requestMap = new HashMap<RequestMatcher, Collection<ConfigAttribute>>();
@@ -30,21 +32,20 @@ public class MyFilterSecurityMetadataSource implements FilterInvocationSecurityM
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
 		FilterInvocation fi = (FilterInvocation) object;
 		HttpServletRequest request = fi.getRequest();
+		System.out.println("当前URL：" + fi.getRequestUrl());
 		String uri = request.getRequestURI();
-		System.out.println(uri);
-		/*
-		 * List<WoSysRole> list = woSysRoleService.findRoleListByUrl(uri);
-		 * System.out.println(list);
-		 */
+		System.out.println("当前URI：" + uri);
+		List<WoSysRole> list = woSysRoleService.findRoleListByUrl(uri);
 		//根据当前访问的url从数据库获取所有的角色，如果为空，表示所有角色都可以访问
 		List<ConfigAttribute> configs = new ArrayList<ConfigAttribute>();
-		SecurityConfig config = new SecurityConfig("ROLE_ADMIN");
-		configs.add(config);
-		/*
-		 * for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry :
-		 * requestMap.entrySet()) { if (entry.getKey().matches(request)) { return
-		 * entry.getValue(); } }
-		 */
+		System.out.println(list);
+		if(list!=null && list.size() > 0){
+			for(WoSysRole role:list){
+				configs.add(new SecurityConfig(role.getKey()));
+			}
+		}else{
+			configs.add(new SecurityConfig("ROLE_ANONYMOUS"));
+		}
 		return configs;
 	}
 

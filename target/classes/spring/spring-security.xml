@@ -11,9 +11,10 @@
 	<http pattern="/fonts/**" security="none"></http>
 	<http pattern="/html/**" security="none"></http>
 	<http pattern="/login.html" security="none"></http>
+	<http pattern="/favicon.ico" security="none"></http>
 
 	<http use-expressions="false">
-		<custom-filter after="LAST" ref="dynamicallyUrlInterceptor"/>
+		<custom-filter before="FILTER_SECURITY_INTERCEPTOR"  ref="dynamicallyUrlInterceptor"/>
 		<form-login login-page="/login.html" authentication-success-forward-url="/index.html" default-target-url="/index.html" password-parameter="pwd" username-parameter="username"/>
 		<logout logout-success-url="/login.html"/>
 		<csrf disabled="true"/>
@@ -27,12 +28,12 @@
 			<password-encoder hash="md5"></password-encoder>
 		</authentication-provider>
 	</authentication-manager>
-	<beans:bean id="userService" class="com.workorder.security.service.UserService"></beans:bean>
-	 <beans:bean id="dynamicallyUrlInterceptor" class="com.workorder.filter.DynamicallyUrlInterceptor">
+<!-- 	<beans:bean id="userService" class="com.workorder.security.service.UserService"></beans:bean> -->
+<!-- 	 <beans:bean id="dynamicallyUrlInterceptor" class="com.workorder.filter.DynamicallyUrlInterceptor">
 		<beans:property name="securityMetadataSource" ref="securityMetadataSource"></beans:property>
 		<beans:property name="accessDecisionManager" ref="accessDecisionManager"></beans:property>
-	</beans:bean>
+	</beans:bean> -->
 	
-	<beans:bean id="securityMetadataSource" class="com.workorder.filter.MyFilterSecurityMetadataSource"></beans:bean>
-	<beans:bean id="accessDecisionManager" class="com.workorder.filter.MyAccessDecisionManager"></beans:bean>
+	<!-- <beans:bean id="securityMetadataSource" class="com.workorder.filter.MyFilterSecurityMetadataSource"></beans:bean>
+	<beans:bean id="accessDecisionManager" class="com.workorder.filter.MyAccessDecisionManager"></beans:bean> -->
 </beans:beans>

@@ -22,6 +22,7 @@ import com.workorder.service.WoSysRoleService;
 import com.workorder.service.WoSysUserService;
 import com.workorder.util.MD5Util;
 
+@Service
 public class UserService implements UserDetailsService {
 
 	@Autowired
@@ -38,7 +39,7 @@ public class UserService implements UserDetailsService {
 		}
 		List<WoSysRole> list = woSysRoleService.findRoleListByUid(woSysUser.getId());
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		if(list==null){
+		if(list==null || list.size() == 0){
 			throw new UsernameNotFoundException("无访问权限");
 		}
 		for(WoSysRole role : list){

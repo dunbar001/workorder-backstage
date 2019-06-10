@@ -11,20 +11,21 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+@Service
 public class MyAccessDecisionManager implements AccessDecisionManager {
 
 	@Override
 	public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes)
 			throws AccessDeniedException, InsufficientAuthenticationException {
-		// TODO Auto-generated method stub
 		Iterator<ConfigAttribute> ite = configAttributes.iterator();
 		while (ite.hasNext()) {
 			ConfigAttribute ca = ite.next();
 			String needRole = ((SecurityConfig) ca).getAttribute();
 			for (GrantedAuthority ga : authentication.getAuthorities()) {
-				if (ga.getAuthority().equals(needRole) || "ROLE_SUPER_ADMIN".equals(ga.getAuthority())) {
+				if ((ga.getAuthority().equals(needRole) && !"ROLE_ANONYMOUS".equals(ga.getAuthority())) || "ROLE_SUPER_ADMIN".equals(ga.getAuthority())) {
 					return;
 				}
 			}
