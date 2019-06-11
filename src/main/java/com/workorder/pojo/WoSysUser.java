@@ -10,6 +10,8 @@ public class WoSysUser {
     private Boolean enabled;
     
     private WoUser user;
+    
+    private WoUserRole userRole;
 
     public Integer getId() {
         return id;
@@ -51,9 +53,17 @@ public class WoSysUser {
 		this.user = user;
 	}
 
+	public WoUserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(WoUserRole userRole) {
+		this.userRole = userRole;
+	}
+
 	@Override
 	public String toString() {
 		return "WoSysUser [id=" + id + ", name=" + name + ", pwd=" + pwd + ", enabled=" + enabled + ", user=" + user
-				+ "]";
+				+ ", userRole=" + userRole + "]";
 	}
 }

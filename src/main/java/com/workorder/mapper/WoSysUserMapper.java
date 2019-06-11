@@ -29,4 +29,6 @@ public interface WoSysUserMapper {
     int updateByPrimaryKey(WoSysUser record);
     
     WoSysUser findById(Integer id);
+    
+    WoSysUser findByName(String name);
 }

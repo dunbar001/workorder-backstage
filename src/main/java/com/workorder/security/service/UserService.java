@@ -33,15 +33,15 @@ public class UserService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		WoSysUser woSysUser = woSysUserService.findByUsername(username);
+		WoSysUser woSysUser = woSysUserService.loginByUsername(username);
 		if(woSysUser == null) {
 			throw new UsernameNotFoundException("用户名或密码错误");
 		}
 		List<WoSysRole> list = woSysRoleService.findRoleListByUid(woSysUser.getId());
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		if(list==null || list.size() == 0){
+		/*if(list==null || list.size() == 0){
 			throw new UsernameNotFoundException("无访问权限");
-		}
+		}*/
 		for(WoSysRole role : list){
 			authorities.add(new SimpleGrantedAuthority(role.getKey()));
 		}

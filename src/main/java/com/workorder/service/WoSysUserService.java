@@ -6,9 +6,11 @@ import com.workorder.vo.V_Search_User;
 
 public interface WoSysUserService {
 	
-	public WoSysUser findByUsername(String username);
+	public WoSysUser loginByUsername(String username);
 	
 	public WoSysUser findById(Integer id);
 	
 	public PageResult findPageList(V_Search_User user); 
+	
+	public WoSysUser findByName(String name);
 }

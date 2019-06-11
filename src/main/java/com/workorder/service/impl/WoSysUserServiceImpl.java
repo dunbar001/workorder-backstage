@@ -21,8 +21,11 @@ public class WoSysUserServiceImpl implements WoSysUserService {
 	@Autowired
 	private WoSysUserMapper woSysUserMapper;
 	
+	/**
+	 * 根据登录用户名登录
+	 */
 	@Override
-	public WoSysUser findByUsername(String username) {
+	public WoSysUser loginByUsername(String username) {
 		WoSysUserExample example = new WoSysUserExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andNameEqualTo(username);
@@ -42,4 +45,13 @@ public class WoSysUserServiceImpl implements WoSysUserService {
 		return null;
 	}
 
+	/**
+	 * 根据登录用户名查找用户信息
+	 */
+	@Override
+	public WoSysUser findByName(String name) {
+		WoSysUser user = woSysUserMapper.findByName(name);
+		System.out.println(user);
+		return user;
+	}
 }

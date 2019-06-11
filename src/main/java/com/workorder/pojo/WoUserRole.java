@@ -6,6 +6,8 @@ public class WoUserRole {
     private Integer uid;
 
     private Integer rid;
+    
+    private WoSysRole role;
 
     public Integer getId() {
         return id;
@@ -30,4 +32,17 @@ public class WoUserRole {
     public void setRid(Integer rid) {
         this.rid = rid;
     }
+
+	public WoSysRole getRole() {
+		return role;
+	}
+
+	public void setRole(WoSysRole role) {
+		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "WoUserRole [id=" + id + ", uid=" + uid + ", rid=" + rid + ", role=" + role + "]";
+	}
 }

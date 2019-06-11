@@ -6,6 +6,11 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="key" property="key" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="BaseResultMap2" type="com.workorder.pojo.WoSysRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_name" property="name" jdbcType="VARCHAR" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

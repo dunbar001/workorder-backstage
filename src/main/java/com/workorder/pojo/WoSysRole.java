@@ -30,4 +30,9 @@ public class WoSysRole {
     public void setKey(String key) {
         this.key = key == null ? null : key.trim();
     }
+
+	@Override
+	public String toString() {
+		return "WoSysRole [id=" + id + ", name=" + name + ", key=" + key + "]";
+	}
 }

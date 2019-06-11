@@ -32,7 +32,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
 						<div class="">
-                           	<a href="javascript:void(0);" class="btn btn-primary "><i class="fa fa-plus"></i> 新建用户</a>
+                           	<a href="javascript:void(0);" data-toggle="modal" data-target="#myEditModal" class="btn btn-primary "><i class="fa fa-plus"></i> 新建用户</a>
                        	</div>
                        	<div class="searchContainer">
                        		<form class="form-inline">
@@ -68,8 +68,8 @@
                                     <td class="center">4</td>
                                     <td class="center">X</td>
                                     <td>
-                                    	<a class="btn btn-sm btn-primary" href="javascript:void(0)" onclick="handleBtnClick('/pages/checklist/detail.html')">处理</a>
-                                		<a class="btn btn-sm btn-primary" href="#">备注</a>
+                                    	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myEditModal" href="javascript:void(0)" >编辑</a>
+                                		<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myDetailModal" href="javascript:void(0)">查看</a>
                                     </td>
                                 </tr>
                                 <tr class="gradeC">
@@ -83,8 +83,8 @@
                                     <td class="center">5</td>
                                     <td class="center">C</td>
                                     <td>
-                                    	<a class="btn btn-sm btn-primary" href="javascript:void(0)" onclick="handleBtnClick('/pages/checklist/detail.html')">处理</a>
-                                		<a class="btn btn-sm btn-primary" href="#">备注</a>
+                                    	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myEditModal" href="javascript:void(0)" >编辑</a>
+                                		<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myDetailModal" href="javascript:void(0)">查看</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -94,6 +94,156 @@
             </div>
         </div>
     </div>
+    
+    <div class="modal inmodal" id="myEditModal" tabindex="-1" role="dialog" aria-hidden="true">
+     	<div class="modal-dialog">
+         	<div class="modal-content animated bounceInRight">
+             	  <div class="modal-header">
+	                 <h4 class="modal-title">编辑</h4>
+                  </div>
+	              <div class="modal-body">
+	              		<form method="get" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control"><span class="help-block m-b-none">登录名，不可重复</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户昵称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control"> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">所属单位</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">所属用户组</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">电话</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">邮箱</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">居住地址</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">年龄</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">性别</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">职位</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+	              </div>
+	              <div class="modal-footer">
+	                  <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+	                  <button type="button" class="btn btn-primary">保存</button>
+	              </div>
+             </div>
+         </div>
+     </div>
+     
+     <div class="modal inmodal" id="myDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+     	<div class="modal-dialog">
+         	<div class="modal-content animated bounceInRight">
+             	  <div class="modal-header">
+	                 <h4 class="modal-title">详情</h4>
+                  </div>
+	              <div class="modal-body">
+		              <div class="container-fluid">
+			              	<div class="row">
+			                 	<div class="col-sm-4">用户名称</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">用户昵称</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">所属单位</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">所属用户组</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">电话</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">邮箱</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">居住地</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">性别</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">年龄</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">职位</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+			                 <div class="hr-line-dashed"></div>
+			                 <div class="row">
+			                 	<div class="col-sm-4">创建时间</div>
+			                 	<div class="col-sm-3">bbb</div>
+			                 </div>
+		              	</div>
+	              </div>
+	              <div class="modal-footer">
+	                  <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+	                  <button type="button" class="btn btn-primary">保存</button>
+	              </div>
+             </div>
+         </div>
+     </div>
 
     <script src="../../../js/jquery.min.js?v=2.1.4"></script>
     <script src="../../../js/bootstrap.min.js?v=3.3.5"></script>

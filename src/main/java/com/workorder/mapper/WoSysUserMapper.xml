@@ -6,7 +6,8 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="pwd" property="pwd" jdbcType="VARCHAR" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
-    <association property="user" resultMap="com.workorder.mapper.WoUserMapper.BaseResultMap"></association>
+    <association property="user" fetchType="lazy" resultMap="com.workorder.mapper.WoUserMapper.BaseResultMap"></association>
+    <association property="userRole" fetchType="lazy" resultMap="com.workorder.mapper.WoUserRoleMapper.BaseResultMap"></association>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -197,5 +198,11 @@
   
   <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   	select wo_sys_user.*,wo_user.* from wo_sys_user join wo_user on  wo_sys_user.id = wo_user.uid where wo_sys_user.id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select wo_sys_user.*,wo_user_role.*,wo_sys_role.id,wo_sys_role.name as role_name,wo_sys_role.key,wo_user.* from wo_sys_user JOIN wo_user_role on wo_sys_user.id=wo_user_role.uid JOIN wo_sys_role ON wo_user_role.rid=wo_sys_role.id
+	JOIN wo_user ON wo_sys_user.id=wo_user.uid
+  	where wo_sys_user.name=#{name,jdbcType=VARCHAR}
   </select>
 </mapper>
