@@ -8,19 +8,19 @@ import java.io.Serializable;
  *
  */
 public class Result implements Serializable{
-	private boolean flag;
+	private boolean success;
 	private String message;
 	
-	public Result(boolean flag, String message) {
+	public Result(boolean success, String message) {
 		super();
-		this.flag = flag;
+		this.success = success;
 		this.message = message;
 	}
-	public boolean isFlag() {
-		return flag;
+	public boolean isSuccess() {
+		return success;
 	}
-	public void setFlag(boolean flag) {
-		this.flag = flag;
+	public void setSuccess(boolean success) {
+		this.success = success;
 	}
 	public String getMessage() {
 		return message;

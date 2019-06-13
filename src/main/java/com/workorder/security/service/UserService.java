@@ -37,15 +37,9 @@ public class UserService implements UserDetailsService {
 		if(woSysUser == null) {
 			throw new UsernameNotFoundException("用户名或密码错误");
 		}
-		List<WoSysRole> list = woSysRoleService.findRoleListByUid(woSysUser.getId());
+		WoSysRole role = woSysRoleService.findRoleByUid(woSysUser.getId());
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		/*if(list==null || list.size() == 0){
-			throw new UsernameNotFoundException("无访问权限");
-		}*/
-		for(WoSysRole role : list){
-			authorities.add(new SimpleGrantedAuthority(role.getKey()));
-		}
-		System.out.println(MD5Util.MD5Encode("123456",""));
+		authorities.add(new SimpleGrantedAuthority(role.getRoleKey()));
 		return new User(username, woSysUser.getPwd(), authorities );
 	}
 

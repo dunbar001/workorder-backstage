@@ -5,7 +5,7 @@ public class WoSysRole {
 
     private String name;
 
-    private String key;
+    private String roleKey;
 
     public Integer getId() {
         return id;
@@ -23,16 +23,16 @@ public class WoSysRole {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getKey() {
-        return key;
+    public String getRoleKey() {
+        return roleKey;
     }
 
-    public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
+    public void setRoleKey(String roleKey) {
+        this.roleKey = roleKey == null ? null : roleKey.trim();
     }
 
 	@Override
 	public String toString() {
-		return "WoSysRole [id=" + id + ", name=" + name + ", key=" + key + "]";
+		return "WoSysRole [id=" + id + ", name=" + name + ", roleKey=" + roleKey + "]";
 	}
 }

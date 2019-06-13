@@ -4,12 +4,12 @@
   <resultMap id="BaseResultMap" type="com.workorder.pojo.WoSysRole" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="role_key" property="roleKey" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="BaseResultMap2" type="com.workorder.pojo.WoSysRole" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="role_name" property="name" jdbcType="VARCHAR" />
-    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="role_key" property="roleKey" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, key
+    id, name, role_key as roleKey
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.workorder.pojo.WoSysRoleExample" >
     select
@@ -103,9 +103,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.workorder.pojo.WoSysRole" >
-    insert into wo_sys_role (id, name, key
+    insert into wo_sys_role (id, name, role_key
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{roleKey,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.workorder.pojo.WoSysRole" >
@@ -117,8 +117,8 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="key != null" >
-        key,
+      <if test="roleKey != null" >
+        role_key,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -128,8 +128,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="key != null" >
-        #{key,jdbcType=VARCHAR},
+      <if test="roleKey != null" >
+        #{roleKey,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -148,8 +148,8 @@
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.key != null" >
-        key = #{record.key,jdbcType=VARCHAR},
+      <if test="record.roleKey != null" >
+        role_key = #{record.roleKey,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -160,7 +160,7 @@
     update wo_sys_role
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      key = #{record.key,jdbcType=VARCHAR}
+      role_key = #{record.roleKey,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -171,8 +171,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="key != null" >
-        key = #{key,jdbcType=VARCHAR},
+      <if test="roleKey != null" >
+        role_key = #{roleKey,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -180,16 +180,16 @@
   <update id="updateByPrimaryKey" parameterType="com.workorder.pojo.WoSysRole" >
     update wo_sys_role
     set name = #{name,jdbcType=VARCHAR},
-      key = #{key,jdbcType=VARCHAR}
+      role_key = #{roleKey,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="findRoleListByUid" parameterType="java.lang.Integer" resultType="com.workorder.pojo.WoSysRole">
-  	select wo_sys_role.* from wo_sys_role join wo_user_role on wo_sys_role.id=wo_user_role.rid where wo_user_role.uid = #{uid,jdbcType=INTEGER}
+  <select id="findRoleByUid" parameterType="java.lang.Integer" resultType="com.workorder.pojo.WoSysRole">
+  	select wo_sys_role.id,wo_sys_role.name,wo_sys_role.role_key as roleKey from wo_sys_role join wo_user_role on wo_sys_role.id=wo_user_role.rid where wo_user_role.uid = #{uid,jdbcType=INTEGER}
   </select>
   
   <select id="findRoleListByUrl" parameterType="java.lang.String" resultType="com.workorder.pojo.WoSysRole">
-  	select * from wo_sys_role join wo_permission_role on wo_sys_role.id=wo_permission_role.rid join 
+  	select wo_sys_role.id,wo_sys_role.name,wo_sys_role.role_key as roleKey from wo_sys_role join wo_permission_role on wo_sys_role.id=wo_permission_role.rid join 
   	wo_permission on wo_permission_role.permission_id=wo_permission.id
   	where wo_permission.url=#{url,jdbcType=VARCHAR}
   </select>

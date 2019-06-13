@@ -41,7 +41,7 @@ public class MyFilterSecurityMetadataSource implements FilterInvocationSecurityM
 		System.out.println(list);
 		if(list!=null && list.size() > 0){
 			for(WoSysRole role:list){
-				configs.add(new SecurityConfig(role.getKey()));
+				configs.add(new SecurityConfig(role.getRoleKey()));
 			}
 		}else{
 			configs.add(new SecurityConfig("ROLE_ANONYMOUS"));

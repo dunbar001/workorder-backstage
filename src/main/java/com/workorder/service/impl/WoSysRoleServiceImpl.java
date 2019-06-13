@@ -6,8 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.workorder.entity.PageResult;
 import com.workorder.mapper.WoSysRoleMapper;
 import com.workorder.pojo.WoSysRole;
+import com.workorder.pojo.WoSysRoleExample;
+import com.workorder.pojo.WoSysRoleExample.Criteria;
 import com.workorder.service.WoSysRoleService;
 
 @Service
@@ -17,14 +22,80 @@ public class WoSysRoleServiceImpl implements WoSysRoleService {
 	@Autowired
 	private WoSysRoleMapper sysRoleMapper;
 
+	/**
+	 * 根据用户id查询所属用户组
+	 */
 	@Override
-	public List<WoSysRole> findRoleListByUid(Integer uid) {
-		return sysRoleMapper.findRoleListByUid(uid);
+	public WoSysRole findRoleByUid(Integer uid) {
+		return sysRoleMapper.findRoleByUid(uid);
 	}
 
+	/**
+	 * 根据url查询所有用户组
+	 */
 	@Override
 	public List<WoSysRole> findRoleListByUrl(String url) {
-		// TODO Auto-generated method stub
 		return sysRoleMapper.findRoleListByUrl(url);
+	}
+
+	/**
+	 * 按分页查询
+	 */
+	@Override
+	public PageResult findPage(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		Page<WoSysRole> page = (Page<WoSysRole>)sysRoleMapper.selectByExample(null);
+		return new PageResult(page.getTotal(), page.getResult());
+	}
+
+	/**
+	 * 增加
+	 */
+	@Override
+	public void add(WoSysRole role) {
+		sysRoleMapper.insert(role);
+	}
+
+	/**
+	 * 更新
+	 */
+	@Override
+	public void update(WoSysRole role) {
+		sysRoleMapper.updateByPrimaryKey(role);
+	}
+
+	/**
+	 * 根据ID获取实体
+	 */
+	@Override
+	public WoSysRole findOne(Integer id) {
+		return sysRoleMapper.selectByPrimaryKey(id);
+	}
+
+	/**
+	 * 批量删除
+	 */
+	@Override
+	public void delete(Integer[] ids) {
+		for(Integer id : ids){
+			sysRoleMapper.deleteByPrimaryKey(id);
+		}
+	}
+
+	/**
+	 * 根据搜索条件分页获取数据
+	 */
+	@Override
+	public PageResult findPage(WoSysRole role, int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		WoSysRoleExample roleExample = new WoSysRoleExample();
+		Criteria criteria = roleExample.createCriteria();
+		if(role != null){
+			if(role.getName()!=null && role.getName().length() > 0){
+				criteria.andNameLike("%" + role.getName() + "%");
+			}
+		}
+		Page<WoSysRole> page = (Page<WoSysRole>)sysRoleMapper.selectByExample(roleExample);
+		return new PageResult(page.getTotal(), page.getResult());
 	}
 }
