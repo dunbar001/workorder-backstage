@@ -1,4 +1,4 @@
-app.directive('datatable', function () {
+/*app.directive('datatable', function () {
     return {
         restrict: 'E, A, C',
         link: function (scope, element, attrs, controller) {
@@ -11,6 +11,7 @@ app.directive('datatable', function () {
                 if (data) {
                     dataTable.fnClearTable();
                     dataTable.fnAddData(data);
+                    //=data.total;
                 }
             }
         },
@@ -18,11 +19,12 @@ app.directive('datatable', function () {
             options: "="
         }
     };
-  }).controller("woRoleController",function($scope,$controller,$compile,woRoleService){
+  })*/
+  app.controller("woRoleController",function($scope,$controller,$compile,woRoleService){
 	
 	$controller("baseController",{$scope:$scope});
 	
-	$scope.options = {
+	/*$scope.options = {
 		columns: [{
         	data:null,
         	"mRender": function (data, type, row, meta) {
@@ -76,17 +78,18 @@ app.directive('datatable', function () {
         "ordering": false,
         "searching": false,
         "dom": '<"top"i>rt<"bottom"flp><"clear">',
-        aaData: []
-    };
+        aaData: [],
+        "infoCallback": function( settings, start, end, max, total, pre ) {
+	        return start +" to "+ end;
+        }
+    };*/
 	
 	//分页
 	$scope.findPage=function(page,rows){	
 		woRoleService.findPage(page,rows).success(
 			function(response){
-				//$scope.list=response.rows;
-				 $scope.options.aaData = response.rows;
-				$scope.options.recordsTotal = response.total;
-				//$scope.paginationConf.totalItems=response.total;//更新总记录数
+				 $scope.options.list = response.rows;
+				 $scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
 	}
@@ -145,9 +148,8 @@ app.directive('datatable', function () {
 	$scope.search=function(page,rows){			
 		woRoleService.search(page,rows,$scope.searchEntity).success(
 			function(response){
-				//$scope.list=response.rows;	
-				//$scope.paginationConf.totalItems=response.total;//更新总记录数
-				$scope.options.aaData = response.rows;
+				$scope.list=response.rows;	
+				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
 	}
@@ -170,5 +172,14 @@ app.directive('datatable', function () {
 	$scope.deleteById=function(id){
 		var arr = [id];
 		$scope.dele($scope.selectIds);
+	}
+	
+	//获取所有的权限数据
+	$scope.findAllPermission=function(){
+		woRoleService.findAllPermission().success(
+				function(res){
+					$scope.permissionList=res;
+				}
+		)
 	}
 })

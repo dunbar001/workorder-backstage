@@ -23,4 +23,8 @@ app.service("woRoleService",function($http){
 	this.search=function(page,rows,searchEntity){
 		return $http.post('/role/search.do?page='+page+"&rows="+rows, searchEntity);
 	}
+	//获取所有权限
+	this.findAllPermission=function(){
+		return $http.get('/role/findAllPermission.do');
+	}
 })

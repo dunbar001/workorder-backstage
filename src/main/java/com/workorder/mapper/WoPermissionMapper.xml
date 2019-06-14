@@ -8,6 +8,14 @@
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="selectByPid" type="com.workorder.pojo.WoPermission" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+     <collection property="children" ofType="com.workorder.pojo.WoPermission" select="findByParentId" column="id"/>
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -208,4 +216,8 @@
       pid = #{pid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findByParentId" resultMap="selectByPid">
+  	select id,name,url,pid from wo_permission where pid=#{0}
+  </select>
 </mapper>

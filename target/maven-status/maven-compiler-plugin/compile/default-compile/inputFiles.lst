@@ -14,8 +14,10 @@ D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\filt
 D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\service\impl\MyAuthenticationSuccessHandler.java
 D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\vo\V_WoUser.java
 D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\pojo\WoPermissionRole.java
+D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\service\impl\WoPermissionServiceImpl.java
 D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\filter\DynamicallyUrlInterceptor.java
 D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\mapper\WoPermissionMapper.java
+D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\service\WoPermissionService.java
 D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\mapper\WoUserRoleMapper.java
 D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\entity\Result.java
 D:\gitee.uploadfiles\github\workorder-backstage\src\main\java\com\workorder\pojo\WoUserRoleExample.java

@@ -21,16 +21,25 @@
 
     <link href="../../../css/animate.min.css" rel="stylesheet">
     <link href="../../../css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
-    
+    <link rel="stylesheet" href="../../../plugins/angularjs/pagination.css">
     <script type="text/javascript" src="../../../plugins/angularjs/angular.min.js"></script>
-	<script type="text/javascript" src="../../../js/base.js"></script>
+    <script src="../../../plugins/angularjs/pagination.js"></script>
+	<script type="text/javascript" src="../../../js/base_pagination.js"></script>
 	<script type="text/javascript" src="../../../js/service/woRoleService.js"></script>
 	<script type="text/javascript" src="../../../js/controller/baseController.js"></script>
 	<script type="text/javascript" src="../../../js/controller/woRoleController.js"></script>
 
+	<style type="text/css">
+		.searchContainer{
+			margin:15px 0;
+		}
+		.label-check{
+			margin-right: 10px;
+		}
+	</style>
 </head>
 
-<body ng-app="workorder" ng-controller="woRoleController" ng-init="findPage(1,10)" class="white-bg">
+<body ng-app="workorder" ng-controller="woRoleController" ng-init="findPage(1,10);findAllPermission()" class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-12">
@@ -59,7 +68,7 @@
                                     <th width="*">操作</th>
                                 </tr>
                             </thead>
-                            <!-- <tbody>
+                            <tbody>
                                 <tr class="gradeX" ng-repeat="item in list">
                                 	<td class="center">
                                 		<input ng-checked="checked" ng-click="updateSelection($event,item.id)" type="checkbox">
@@ -75,8 +84,11 @@
                                 		<a class="btn btn-sm btn-primary" ng-click="deleteById(item.id)" href="javascript:void(0)">删除</a>
                                     </td>
                                 </tr>
-                            </tbody> -->
+                            </tbody>
                         </table>
+                        <!--数据列表/-->
+						<!-- 分页 -->
+						<tm-pagination conf="paginationConf"></tm-pagination>
                     </div>
                 </div>
             </div>
@@ -145,6 +157,37 @@
              </div>
          </div>
      </div>
+     
+      <div class="modal inmodal" id="myPermissModal" tabindex="-1" role="dialog" aria-hidden="true">
+     	<div class="modal-dialog">
+         	<div class="modal-content animated bounceInRight">
+	             <div class="modal-header">
+	                 <h4 class="modal-title">权限分配</h4>
+	                 </div>
+	              <div class="modal-body">
+	              	<div class="container-fluid">
+	              		<div class="row" ng-repeat="item in permissionList">
+	              			<div class="col-sm-12">
+	              				<label>
+		                             <input type="checkbox" class="i-checks">{{item.name}}
+		                        </label>
+	              			</div>
+	              			<div class="col-sm-12">
+	              				&nbsp;&nbsp;&nbsp;&nbsp;
+	              				<label class="label-check" ng-repeat="child in item.children">
+		                             <input type="checkbox" class="i-checks">{{child.name}}
+		                         </label>
+	              			</div>
+	              		</div>
+	              	</div>
+	              </div>
+	              <div class="modal-footer">
+	                  <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+	                  <button type="button" class="btn btn-primary">保存</button>
+	              </div>
+             </div>
+         </div>
+     </div>
 
     <script src="../../../js/jquery.min.js?v=2.1.4"></script>
     <script src="../../../js/bootstrap.min.js?v=3.3.5"></script>
@@ -155,21 +198,6 @@
     <script src="../../../js/plugins/layer/laydate/laydate.js"></script>
      
     <script>
-       /*  $(document).ready(function(){
-        	$(".dataTables-example").dataTable({
-        		 "ordering": false,
-        		 "searching": false,
-        		 "dom": '<"top"i>rt<"bottom"flp><"clear">',
-        		 "data": ,
-       	         "columns": [
-       	            { "title": "Engine" },
-       	            { "title": "Browser" },
-       	            { "title": "Platform" },
-       	            { "title": "Version", "class": "center" },
-       	            { "title": "Grade", "class": "center" }
-       	         ]
-        	});
-       	}); */
         var start={elem:"#start",format:"YYYY/MM/DD hh:mm:ss",min:laydate.now(),max:"2099-06-16 23:59:59",istime:true,istoday:false,choose:function(datas){end.min=datas;end.start=datas}};
         var end={elem:"#end",format:"YYYY/MM/DD hh:mm:ss",min:laydate.now(),max:"2099-06-16 23:59:59",istime:true,istoday:false,choose:function(datas){start.max=datas}};
         laydate(start);

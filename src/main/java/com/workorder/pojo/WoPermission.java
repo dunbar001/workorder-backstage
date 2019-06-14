@@ -1,5 +1,7 @@
 package com.workorder.pojo;
 
+import java.util.List;
+
 public class WoPermission {
     private Integer id;
 
@@ -10,6 +12,8 @@ public class WoPermission {
     private String url;
 
     private Integer pid;
+    
+    private List<WoPermission> children;
 
     public Integer getId() {
         return id;
@@ -50,4 +54,19 @@ public class WoPermission {
     public void setPid(Integer pid) {
         this.pid = pid;
     }
+
+	public List<WoPermission> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<WoPermission> children) {
+		this.children = children;
+	}
+
+	@Override
+	public String toString() {
+		return "WoPermission [id=" + id + ", name=" + name + ", description=" + description + ", url=" + url + ", pid="
+				+ pid + ", children=" + children + "]";
+	}
+
 }

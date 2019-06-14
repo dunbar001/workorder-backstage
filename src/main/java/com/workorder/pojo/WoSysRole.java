@@ -6,7 +6,7 @@ public class WoSysRole {
     private String name;
 
     private String roleKey;
-
+    
     public Integer getId() {
         return id;
     }
@@ -35,4 +35,5 @@ public class WoSysRole {
 	public String toString() {
 		return "WoSysRole [id=" + id + ", name=" + name + ", roleKey=" + roleKey + "]";
 	}
+
 }

@@ -1,5 +1,7 @@
 package com.workorder.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.workorder.entity.PageResult;
 import com.workorder.entity.Result;
+import com.workorder.pojo.WoPermission;
 import com.workorder.pojo.WoSysRole;
+import com.workorder.service.WoPermissionService;
 import com.workorder.service.WoSysRoleService;
 
 @RestController
@@ -17,6 +21,9 @@ public class RoleController {
 
 	@Autowired
 	private WoSysRoleService sysRoleService;
+	
+	@Autowired
+	private WoPermissionService permissionService;
 	
 	/**
 	 * 返回全部列表
@@ -95,5 +102,10 @@ public class RoleController {
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody WoSysRole role, int page, int rows  ){
 		return sysRoleService.findPage(role, page, rows);		
+	}
+	
+	@RequestMapping("/findAllPermission")
+	public List<WoPermission> findAllPermission(){
+		return permissionService.findAll();
 	}
 }

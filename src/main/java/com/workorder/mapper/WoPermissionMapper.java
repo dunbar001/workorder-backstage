@@ -27,4 +27,6 @@ public interface WoPermissionMapper {
     int updateByPrimaryKeySelective(WoPermission record);
 
     int updateByPrimaryKey(WoPermission record);
+    
+    List<WoPermission> findByParentId(Integer id);
 }
