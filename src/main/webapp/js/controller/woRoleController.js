@@ -182,4 +182,29 @@
 				}
 		)
 	}
+	
+	//权限的id集合
+	$scope.permissionIds=[];
+	//当前选择的用户组id
+	$scope.currentRoleId="";
+	
+	//选择权限
+	$scope.selectPermission = function($event, id) {		
+		if($event.target.checked){//如果是被选中,则增加到数组
+			$scope.permissionIds.push( id);			
+		}else{
+			var idx = $scope.selectIds.indexOf(id);
+            $scope.permissionIds.splice(idx, 1);//删除 
+		}
+	}
+	
+	$scope.savePermission=function(){
+		if($scope.currentRoleId === ""){
+			alert("当前用户组不存在");
+			return false;
+		}
+		if($scope.permissionIds.length === 0){
+			alert("请选择权限");
+		}
+	}
 })

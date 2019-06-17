@@ -79,7 +79,7 @@
                                     <td>{{item.roleKey}}</td>
                                     <td>
                                     	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myEditModal" ng-click="findOne(item.id)" href="javascript:void(0)" >编辑</a>
-                                    	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myPermissModal" href="javascript:void(0)" >权限分配</a>
+                                    	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myPermissModal" ng-click="currentRoleId=item.id" href="javascript:void(0)" >权限分配</a>
                                 		<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myDetailModal" ng-click="findOne(item.id)" href="javascript:void(0)">查看</a>
                                 		<a class="btn btn-sm btn-primary" ng-click="deleteById(item.id)" href="javascript:void(0)">删除</a>
                                     </td>
@@ -165,6 +165,7 @@
 	                 <h4 class="modal-title">权限分配</h4>
 	                 </div>
 	              <div class="modal-body">
+	              	{{permissionIds}}
 	              	<div class="container-fluid">
 	              		<div class="row" ng-repeat="item in permissionList">
 	              			<div class="col-sm-12">
@@ -175,7 +176,7 @@
 	              			<div class="col-sm-12">
 	              				&nbsp;&nbsp;&nbsp;&nbsp;
 	              				<label class="label-check" ng-repeat="child in item.children">
-		                             <input type="checkbox" class="i-checks">{{child.name}}
+		                             <input type="checkbox" ng-click="selectPermission($event,child.id)" class="i-checks">{{child.name}}
 		                         </label>
 	              			</div>
 	              		</div>
@@ -183,7 +184,7 @@
 	              </div>
 	              <div class="modal-footer">
 	                  <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-	                  <button type="button" class="btn btn-primary">保存</button>
+	                  <button type="button" class="btn btn-primary" ng-click="savePermission()">保存</button>
 	              </div>
              </div>
          </div>
