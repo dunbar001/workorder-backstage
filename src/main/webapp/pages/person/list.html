@@ -21,26 +21,39 @@
 
     <link href="../../../css/animate.min.css" rel="stylesheet">
     <link href="../../../css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
-    
-
+    <link rel="stylesheet" href="../../../plugins/angularjs/pagination.css">
+    <script type="text/javascript" src="../../../plugins/angularjs/angular.min.js"></script>
+    <script src="../../../plugins/angularjs/pagination.js"></script>
+	<script type="text/javascript" src="../../../js/base_pagination.js"></script>
+	<script type="text/javascript" src="../../../js/service/woUserService.js"></script>
+	<script type="text/javascript" src="../../../js/controller/baseController.js"></script>
+	<script type="text/javascript" src="../../../js/controller/woUserController.js"></script>
+	<style type="text/css">
+		.searchContainer{
+			margin:15px 0;
+		}
+		.label-check{
+			margin-right: 10px;
+		}
+	</style>
 </head>
 
-<body class="white-bg">
+<body ng-app="workorder" ng-controller="woUserController" class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
 						<div class="">
-                           	<a href="javascript:void(0);" data-toggle="modal" data-target="#myEditModal" class="btn btn-primary "><i class="fa fa-plus"></i> 新建用户</a>
+                           	<a href="javascript:void(0);" data-toggle="modal" data-target="#myEditModal" class="btn btn-primary "><i class="fa fa-plus"></i> 新建</a>
                        	</div>
                        	<div class="searchContainer">
                        		<form class="form-inline">
 	                            <div class="form-group">
 	                                <label class="control-label">用户名：</label>
-                               		<input type="text" placeholder="用户名" class="form-control">
+                               		<input type="text" ng-model="searchEntity.name" placeholder="用户名" class="form-control">
 	                            </div>
-                                <button class="btn btn-sm btn-primary" type="button" style="margin:0">查 询</button>
+                                <button class="btn btn-sm btn-primary" ng-click="reloadList()" type="button" style="margin:0">查 询</button>
                                 <button class="btn btn-sm btn-primary" type="button" style="margin:0">批量删除</button>
 	                        </form>
                        	</div>
@@ -49,39 +62,25 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>编号</th>
-                                    <th>用户名称</th>
-                                    <th>所属单位</th>
+                                    <th>用户名</th>
+                                    <th>用户昵称</th>
                                     <th>所属用户组</th>
                                     <th>电话</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="gradeX">
+                                <tr ng-repeat="item in list" class="gradeX">
                                 	<td class="center">
                                 		<input type="checkbox">
 									</td>
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.name}}
                                     </td>
-                                    <td>Win 95+</td>
-                                    <td class="center">4</td>
-                                    <td class="center">X</td>
-                                    <td>
-                                    	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myEditModal" href="javascript:void(0)" >编辑</a>
-                                		<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myDetailModal" href="javascript:void(0)">查看</a>
+                                    <td>{{item.user.nickName}}
                                     </td>
-                                </tr>
-                                <tr class="gradeC">
-                                	<td class="center">
-										<input type="checkbox">
-									</td>
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 5.0
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td class="center">5</td>
-                                    <td class="center">C</td>
+                                    <td>{{item.userRole.role.name}}</td>
+                                    <td class="center">{{item.user.mobile}}</td>
                                     <td>
                                     	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myEditModal" href="javascript:void(0)" >编辑</a>
                                 		<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myDetailModal" href="javascript:void(0)">查看</a>
@@ -89,6 +88,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <!--数据列表/-->
+						<!-- 分页 -->
+						<tm-pagination conf="paginationConf"></tm-pagination>
                     </div>
                 </div>
             </div>
@@ -254,13 +256,6 @@
     <script src="../../../js/plugins/layer/laydate/laydate.js"></script>
      
     <script>
-        $(document).ready(function(){
-        	$(".dataTables-example").dataTable({
-        		"ordering": false,
-        		 "searching": false,
-        		 "dom": '<"top"i>rt<"bottom"flp><"clear">'
-        	});
-       	});
         var start={elem:"#start",format:"YYYY/MM/DD hh:mm:ss",min:laydate.now(),max:"2099-06-16 23:59:59",istime:true,istoday:false,choose:function(datas){end.min=datas;end.start=datas}};
         var end={elem:"#end",format:"YYYY/MM/DD hh:mm:ss",min:laydate.now(),max:"2099-06-16 23:59:59",istime:true,istoday:false,choose:function(datas){start.max=datas}};
         laydate(start);

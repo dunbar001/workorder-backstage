@@ -3,8 +3,8 @@
 <mapper namespace="com.workorder.mapper.WoPermissionRoleMapper" >
   <resultMap id="BaseResultMap" type="com.workorder.pojo.WoPermissionRole" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="rid" property="rid" jdbcType="INTEGER" />
-    <result column="permission_id" property="permissionId" jdbcType="INTEGER" />
+    <association property="sysRole" column="rid" select="com.workorder.mapper.WoSysRoleMapper.selectByPrimaryKey"></association>
+    <association property="woPermission" column="permission_id" select="com.workorder.mapper.WoPermissionMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -100,7 +100,7 @@
   <insert id="insert" parameterType="com.workorder.pojo.WoPermissionRole" >
     insert into wo_permission_role (id, rid, permission_id
       )
-    values (#{id,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{sysRole.id,jdbcType=INTEGER}, #{woPermission.id,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.workorder.pojo.WoPermissionRole" >

@@ -20,7 +20,7 @@
         }
     };
   })*/
-  app.controller("woRoleController",function($scope,$controller,$compile,woRoleService){
+  app.controller("woRoleController",function($scope,$controller,$compile,$sce,woRoleService){
 	
 	$controller("baseController",{$scope:$scope});
 	
@@ -88,7 +88,7 @@
 	$scope.findPage=function(page,rows){	
 		woRoleService.findPage(page,rows).success(
 			function(response){
-				 $scope.options.list = response.rows;
+				 $scope.list = response.rows;
 				 $scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
@@ -98,7 +98,8 @@
 	$scope.findOne=function(id){				
 		woRoleService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+				$scope.allPermission = $sce.trustAsHtml($scope.ArraytoStr($scope.entity.permissionRole));
 			}
 		);				
 	}
@@ -130,16 +131,25 @@
 		woRoleService.dele(ids).success(
 			function(response){
 				if(response.success){
+					alert("删除成功");
 					$scope.reloadList();//刷新列表
 					$scope.selectIds=[];
+				}else{
+					alert("删除失败");
 				}						
 			}		
 		);				
 	}
 	
 	//根据ids批量删除
-	$scope.deleteByIds=function(){
+	$scope.deleteByIds=function(id){
 		$scope.dele($scope.selectIds);
+	}
+	//根据id删除
+	$scope.deleteById=function(id){
+		var arr = [];
+		arr.push(id);
+		$scope.dele(arr);
 	}
 	
 	$scope.searchEntity={};//定义搜索对象 
@@ -193,11 +203,31 @@
 		if($event.target.checked){//如果是被选中,则增加到数组
 			$scope.permissionIds.push( id);			
 		}else{
-			var idx = $scope.selectIds.indexOf(id);
+			var idx = $scope.permissionIds.indexOf(id);
             $scope.permissionIds.splice(idx, 1);//删除 
 		}
 	}
-	
+	//打开分配权限操作
+	$scope.setRoleId=function(roleId){
+		$scope.currentRoleId = roleId;
+		$scope.permissionIds=[];
+		//根据roleid查询已拥有权限
+		woRoleService.findPermissionIdsByRid(roleId).success(
+				function(response){
+					$scope.permissionIds=response;
+				}
+		)
+	}
+	//是否选中
+	$scope.isChecked=function(perId){
+		for(var i=0;i<$scope.permissionIds.length;i++){
+			if(perId == $scope.permissionIds[i]){
+				return true;
+			}
+		}
+		return false;
+	}
+	//保存分配的权限
 	$scope.savePermission=function(){
 		if($scope.currentRoleId === ""){
 			alert("当前用户组不存在");
@@ -205,6 +235,56 @@
 		}
 		if($scope.permissionIds.length === 0){
 			alert("请选择权限");
+			return false;
 		}
+		woRoleService.distributePermission($scope.currentRoleId,$scope.permissionIds).success(
+				function(response){
+					if(response.success){
+						alert("分配成功");
+						$("#myPermissModal").modal("hide");
+					}else{
+						alert("分配失败");
+					}
+				}
+		)
+	}
+	
+	$scope.ArraytoStr=function(arr){
+		if(arr && arr.length > 0){
+			var str="";
+			for(var i=0;i<arr.length;i++){
+				str+=arr[i].woPermission.parent.name + ":" + arr[i].woPermission.name +"<br>";
+			}
+			return str.substring(0, str.length-1);
+		}
+		return "";
+	}
+	
+	//全选、反选
+	$scope.selectAll=function(e,arr){
+		if(e.target.checked){
+			arr.forEach(function(item,i){
+				if($scope.permissionIds.indexOf(item.id) == -1 ){
+					$scope.permissionIds.push(item.id);
+				}
+			})
+		}else{
+			arr.forEach(function(item,i){
+				$scope.permissionIds.splice($scope.permissionIds.indexOf(item.id),1);
+			})
+		}
+	}
+	
+	$scope.isAllCheckedFunc=function(arr){
+		if($scope.permissionIds.length === 0){
+			return false;
+		}else{
+			for(var i=0;i<arr.length;i++){
+				if($scope.permissionIds.indexOf(arr[i].id) == -1){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 })

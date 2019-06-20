@@ -9,9 +9,9 @@ public class WoSysUser {
 
     private Boolean enabled;
     
-    private WoUser user;
+    private WoUser user = new WoUser();
     
-    private WoUserRole userRole;
+    private WoUserRole userRole = new WoUserRole();
 
     public Integer getId() {
         return id;

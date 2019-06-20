@@ -39,14 +39,14 @@
 	</style>
 </head>
 
-<body ng-app="workorder" ng-controller="woRoleController" ng-init="findPage(1,10);findAllPermission()" class="white-bg">
+<body ng-app="workorder" ng-controller="woRoleController" ng-init="findAllPermission()" class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
 						<div class="">
-                           	<a href="javascript:void(0);" data-toggle="modal" data-target="#myEditModal" ng-click="entity={}" class="btn btn-primary "><i class="fa fa-plus"></i> 新建用户组</a>
+                           	<a href="javascript:void(0);" data-toggle="modal" data-target="#myEditModal" ng-click="entity={}" class="btn btn-primary "><i class="fa fa-plus"></i> 新建</a>
                        	</div>
                        	<div class="searchContainer">
                        		<form class="form-inline">
@@ -79,7 +79,7 @@
                                     <td>{{item.roleKey}}</td>
                                     <td>
                                     	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myEditModal" ng-click="findOne(item.id)" href="javascript:void(0)" >编辑</a>
-                                    	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myPermissModal" ng-click="currentRoleId=item.id" href="javascript:void(0)" >权限分配</a>
+                                    	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myPermissModal" ng-click="setRoleId(item.id)" href="javascript:void(0)" >权限分配</a>
                                 		<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myDetailModal" ng-click="findOne(item.id)" href="javascript:void(0)">查看</a>
                                 		<a class="btn btn-sm btn-primary" ng-click="deleteById(item.id)" href="javascript:void(0)">删除</a>
                                     </td>
@@ -147,7 +147,9 @@
 		                 <div class="hr-line-dashed"></div>
 		                 <div class="row">
 		                 	<div class="col-sm-4">用户组所有权限</div>
-		                 	<div class="col-sm-3">bbb</div>
+		                 	<div class="col-sm-3">
+		                 		<div ng-bind-html="allPermission"></div>
+		                 	</div>
 		                 </div>
 	              	</div>
 	              </div>
@@ -165,18 +167,17 @@
 	                 <h4 class="modal-title">权限分配</h4>
 	                 </div>
 	              <div class="modal-body">
-	              	{{permissionIds}}
 	              	<div class="container-fluid">
 	              		<div class="row" ng-repeat="item in permissionList">
 	              			<div class="col-sm-12">
 	              				<label>
-		                             <input type="checkbox" class="i-checks">{{item.name}}
+		                             <input type="checkbox" ng-checked="isAllCheckedFunc(item.children)" ng-click="selectAll($event,item.children)" class="i-checks">{{item.name}}
 		                        </label>
 	              			</div>
 	              			<div class="col-sm-12">
 	              				&nbsp;&nbsp;&nbsp;&nbsp;
 	              				<label class="label-check" ng-repeat="child in item.children">
-		                             <input type="checkbox" ng-click="selectPermission($event,child.id)" class="i-checks">{{child.name}}
+		                             <input type="checkbox" ng-checked="isChecked(child.id)" ng-click="selectPermission($event,child.id)" class="i-checks">{{child.name}}
 		                         </label>
 	              			</div>
 	              		</div>

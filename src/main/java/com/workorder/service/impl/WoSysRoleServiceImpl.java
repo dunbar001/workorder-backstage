@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.workorder.entity.PageResult;
+import com.workorder.mapper.WoPermissionRoleMapper;
 import com.workorder.mapper.WoSysRoleMapper;
+import com.workorder.pojo.WoPermissionRoleExample;
 import com.workorder.pojo.WoSysRole;
 import com.workorder.pojo.WoSysRoleExample;
 import com.workorder.pojo.WoSysRoleExample.Criteria;
@@ -21,6 +23,9 @@ public class WoSysRoleServiceImpl implements WoSysRoleService {
 
 	@Autowired
 	private WoSysRoleMapper sysRoleMapper;
+	
+	@Autowired
+	private WoPermissionRoleMapper permissionRoleMapper;
 
 	/**
 	 * 根据用户id查询所属用户组
@@ -79,6 +84,10 @@ public class WoSysRoleServiceImpl implements WoSysRoleService {
 	public void delete(Integer[] ids) {
 		for(Integer id : ids){
 			sysRoleMapper.deleteByPrimaryKey(id);
+			WoPermissionRoleExample example = new WoPermissionRoleExample();
+			com.workorder.pojo.WoPermissionRoleExample.Criteria criteria = example.createCriteria();
+			criteria.andRidEqualTo(id);
+			permissionRoleMapper.deleteByExample(example );
 		}
 	}
 

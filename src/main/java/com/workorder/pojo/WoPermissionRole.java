@@ -1,11 +1,13 @@
 package com.workorder.pojo;
 
+import java.util.List;
+
 public class WoPermissionRole {
     private Integer id;
 
-    private Integer rid;
+    private WoSysRole sysRole = new WoSysRole();
 
-    private Integer permissionId;
+    private WoPermission woPermission = new WoPermission();
 
     public Integer getId() {
         return id;
@@ -15,19 +17,24 @@ public class WoPermissionRole {
         this.id = id;
     }
 
-    public Integer getRid() {
-        return rid;
-    }
+	public WoSysRole getSysRole() {
+		return sysRole;
+	}
 
-    public void setRid(Integer rid) {
-        this.rid = rid;
-    }
+	public void setSysRole(WoSysRole sysRole) {
+		this.sysRole = sysRole;
+	}
 
-    public Integer getPermissionId() {
-        return permissionId;
-    }
+	public WoPermission getWoPermission() {
+		return woPermission;
+	}
 
-    public void setPermissionId(Integer permissionId) {
-        this.permissionId = permissionId;
-    }
+	public void setWoPermission(WoPermission woPermission) {
+		this.woPermission = woPermission;
+	}
+
+	@Override
+	public String toString() {
+		return "WoPermissionRole [id=" + id + ", sysRole=" + sysRole + ", woPermission=" + woPermission + "]";
+	}
 }

@@ -27,4 +27,12 @@ app.service("woRoleService",function($http){
 	this.findAllPermission=function(){
 		return $http.get('/role/findAllPermission.do');
 	}
+	//分配权限
+	this.distributePermission=function(roleId,perIds){
+		return $http.post('/role/distributePermission.do?roleId=' + roleId,perIds);
+	}
+	//查询用户组已有权限
+	this.findPermissionIdsByRid=function(roleId){
+		return $http.get('/role/findPermissionIdsByRid.do?roleId=' + roleId);
+	}
 })

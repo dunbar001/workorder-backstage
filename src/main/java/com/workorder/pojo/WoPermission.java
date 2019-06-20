@@ -1,5 +1,6 @@
 package com.workorder.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WoPermission {
@@ -11,9 +12,11 @@ public class WoPermission {
 
     private String url;
 
-    private Integer pid;
+    private WoPermission parent;
     
-    private List<WoPermission> children;
+    private List<WoPermission> children = new ArrayList<WoPermission>();
+
+    private Integer sort;
 
     public Integer getId() {
         return id;
@@ -47,13 +50,13 @@ public class WoPermission {
         this.url = url == null ? null : url.trim();
     }
 
-    public Integer getPid() {
-        return pid;
-    }
+    public WoPermission getParent() {
+		return parent;
+	}
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
+	public void setParent(WoPermission parent) {
+		this.parent = parent;
+	}
 
 	public List<WoPermission> getChildren() {
 		return children;
@@ -63,10 +66,11 @@ public class WoPermission {
 		this.children = children;
 	}
 
-	@Override
-	public String toString() {
-		return "WoPermission [id=" + id + ", name=" + name + ", description=" + description + ", url=" + url + ", pid="
-				+ pid + ", children=" + children + "]";
-	}
+	public Integer getSort() {
+        return sort;
+    }
 
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
 }

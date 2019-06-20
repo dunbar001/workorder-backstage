@@ -1,5 +1,6 @@
 package com.workorder.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.workorder.entity.PageResult;
 import com.workorder.entity.Result;
 import com.workorder.pojo.WoPermission;
+import com.workorder.pojo.WoPermissionRole;
 import com.workorder.pojo.WoSysRole;
 import com.workorder.service.WoPermissionService;
 import com.workorder.service.WoSysRoleService;
@@ -72,8 +75,13 @@ public class RoleController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public WoSysRole findOne(Integer id){
-		return sysRoleService.findOne(id);		
+	public Object findOne(Integer id){
+		WoSysRole sysRole = sysRoleService.findOne(id);
+		if(sysRole!=null){
+			List<WoPermissionRole> list = permissionService.findPermissionIdsByRid(sysRole.getId());
+			sysRole.setPermissionRole(list);
+		}
+		return JSON.toJSON(sysRole);
 	}
 	
 	/**
@@ -104,8 +112,53 @@ public class RoleController {
 		return sysRoleService.findPage(role, page, rows);		
 	}
 	
+	/**
+	 * 获取所有权限数据
+	 * @return
+	 */
 	@RequestMapping("/findAllPermission")
 	public List<WoPermission> findAllPermission(){
 		return permissionService.findAll();
+	}
+	
+	/**
+	 * 给用户组分配权限
+	 * @param perId
+	 * @param roleId
+	 * @return
+	 */
+	@RequestMapping("/distributePermission")
+	public Result distributePermission(@RequestBody Integer[] perIds,Integer roleId){
+		try {
+			List<WoPermissionRole> p_role_list = new ArrayList<>();
+			for(Integer perId : perIds){
+				WoPermissionRole p_role = new WoPermissionRole();
+				p_role.getWoPermission().setId(perId);
+				p_role.getSysRole().setId(roleId);
+				p_role_list.add(p_role);
+			}
+			permissionService.batchAdd(p_role_list);
+			return new Result(true, "成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Result(false, "失败");
+		}
+	}
+	
+	/**
+	 * 根据roleid查询权限id集合
+	 * @param roleId
+	 */
+	@RequestMapping("/findPermissionIdsByRid")
+	public List<Integer> findPermissionIdsByRid(Integer roleId){
+		List<WoPermissionRole> list = permissionService.findPermissionIdsByRid(roleId);
+		List<Integer> ids = new ArrayList<>();
+		if(list!=null && list.size() > 0){
+			for(WoPermissionRole entity : list){
+				ids.add(entity.getWoPermission().getId());
+			}
+		}
+		return ids;
 	}
 }

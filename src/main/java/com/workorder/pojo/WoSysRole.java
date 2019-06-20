@@ -1,11 +1,16 @@
 package com.workorder.pojo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WoSysRole {
     private Integer id;
 
     private String name;
 
     private String roleKey;
+    
+    private List<WoPermissionRole> permissionRole = new ArrayList<>();
     
     public Integer getId() {
         return id;
@@ -31,9 +36,18 @@ public class WoSysRole {
         this.roleKey = roleKey == null ? null : roleKey.trim();
     }
 
+	public List<WoPermissionRole> getPermissionRole() {
+		return permissionRole;
+	}
+
+	public void setPermissionRole(List<WoPermissionRole> permissionRole) {
+		this.permissionRole = permissionRole;
+	}
+
 	@Override
 	public String toString() {
-		return "WoSysRole [id=" + id + ", name=" + name + ", roleKey=" + roleKey + "]";
+		return "WoSysRole [id=" + id + ", name=" + name + ", roleKey=" + roleKey + ", permissionRole=" + permissionRole
+				+ "]";
 	}
 
 }
