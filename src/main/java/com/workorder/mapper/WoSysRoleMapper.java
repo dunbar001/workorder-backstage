@@ -3,6 +3,8 @@ package com.workorder.mapper;
 import com.workorder.pojo.WoSysRole;
 import com.workorder.pojo.WoSysRoleExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface WoSysRoleMapper {
@@ -31,4 +33,6 @@ public interface WoSysRoleMapper {
     WoSysRole findRoleByUid(Integer uid);
     
     List<WoSysRole> findRoleListByUrl(String url);
+    
+    List<Map<String,Integer>> findRoleSelect();
 }

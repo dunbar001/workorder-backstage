@@ -26,6 +26,7 @@
     <script src="../../../plugins/angularjs/pagination.js"></script>
 	<script type="text/javascript" src="../../../js/base_pagination.js"></script>
 	<script type="text/javascript" src="../../../js/service/woUserService.js"></script>
+	<script type="text/javascript" src="../../../js/service/woRoleService.js"></script>
 	<script type="text/javascript" src="../../../js/controller/baseController.js"></script>
 	<script type="text/javascript" src="../../../js/controller/woUserController.js"></script>
 	<style type="text/css">
@@ -38,14 +39,14 @@
 	</style>
 </head>
 
-<body ng-app="workorder" ng-controller="woUserController" class="white-bg">
+<body ng-app="workorder" ng-controller="woUserController" ng-init="findRoleSelect()" class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
 						<div class="">
-                           	<a href="javascript:void(0);" data-toggle="modal" data-target="#myEditModal" class="btn btn-primary "><i class="fa fa-plus"></i> 新建</a>
+                           	<a href="javascript:void(0);" data-toggle="modal" data-target="#myEditModal" ng-click="entity={}" class="btn btn-primary "><i class="fa fa-plus"></i> 新建</a>
                        	</div>
                        	<div class="searchContainer">
                        		<form class="form-inline">
@@ -82,8 +83,9 @@
                                     <td>{{item.userRole.role.name}}</td>
                                     <td class="center">{{item.user.mobile}}</td>
                                     <td>
-                                    	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myEditModal" href="javascript:void(0)" >编辑</a>
-                                		<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myDetailModal" href="javascript:void(0)">查看</a>
+                                    	<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myEditModal" ng-click="findOne(item.id)" href="javascript:void(0)" >编辑</a>
+                                		<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myDetailModal" ng-click="findOne(item.id)" href="javascript:void(0)">查看</a>
+                                		<a class="btn btn-sm btn-primary" data-toggle="modal" href="javascript:void(0)">删除</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -108,61 +110,57 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">用户名称</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control"><span class="help-block m-b-none">登录名，不可重复</span>
+                                    <input type="text" ng-model="entity.name" class="form-control"><span class="help-block m-b-none">登录名，不可重复</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">用户昵称</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control"> 
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">所属单位</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" ng-model="entity.user.nickName" class="form-control"> 
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">所属用户组</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                	<select class="form-control m-b" ng-model="entity.userRole.rid" ng-options="item.id as item.name for item in roleSelect">
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">电话</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" ng-model="entity.user.mobile" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">邮箱</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" ng-model="entity.user.email" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">居住地址</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" ng-model="entity.user.address" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">年龄</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" ng-model="entity.user.age" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">性别</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                	<select class="form-control m-b" ng-model="entity.user.gender" ng-options="item.value as item.text for item in genderList">
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">职位</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" ng-model="entity.user.position" class="form-control">
                                 </div>
                             </div>
                         </form>
@@ -185,63 +183,57 @@
 		              <div class="container-fluid">
 			              	<div class="row">
 			                 	<div class="col-sm-4">用户名称</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.name}}</div>
 			                 </div>
 			                 <div class="hr-line-dashed"></div>
 			                 <div class="row">
 			                 	<div class="col-sm-4">用户昵称</div>
-			                 	<div class="col-sm-3">bbb</div>
-			                 </div>
-			                 <div class="hr-line-dashed"></div>
-			                 <div class="row">
-			                 	<div class="col-sm-4">所属单位</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.user.nickName}}</div>
 			                 </div>
 			                 <div class="hr-line-dashed"></div>
 			                 <div class="row">
 			                 	<div class="col-sm-4">所属用户组</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.userRole.role.name}}</div>
 			                 </div>
 			                 <div class="hr-line-dashed"></div>
 			                 <div class="row">
 			                 	<div class="col-sm-4">电话</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.user.mobile}}</div>
 			                 </div>
 			                 <div class="hr-line-dashed"></div>
 			                 <div class="row">
 			                 	<div class="col-sm-4">邮箱</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.user.email}}</div>
 			                 </div>
 			                 <div class="hr-line-dashed"></div>
 			                 <div class="row">
 			                 	<div class="col-sm-4">居住地</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.user.address}}</div>
 			                 </div>
 			                 <div class="hr-line-dashed"></div>
 			                 <div class="row">
 			                 	<div class="col-sm-4">性别</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.user.gender}}</div>
 			                 </div>
 			                 <div class="hr-line-dashed"></div>
 			                 <div class="row">
 			                 	<div class="col-sm-4">年龄</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.user.age}}</div>
 			                 </div>
 			                 <div class="hr-line-dashed"></div>
 			                 <div class="row">
 			                 	<div class="col-sm-4">职位</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.user.position}}</div>
 			                 </div>
 			                 <div class="hr-line-dashed"></div>
 			                 <div class="row">
 			                 	<div class="col-sm-4">创建时间</div>
-			                 	<div class="col-sm-3">bbb</div>
+			                 	<div class="col-sm-3">{{entity.user.createTime}}</div>
 			                 </div>
 		              	</div>
 	              </div>
 	              <div class="modal-footer">
 	                  <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-	                  <button type="button" class="btn btn-primary">保存</button>
 	              </div>
              </div>
          </div>

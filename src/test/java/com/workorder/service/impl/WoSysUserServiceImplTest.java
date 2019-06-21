@@ -42,4 +42,12 @@ public class WoSysUserServiceImplTest {
 		PageResult page = woSysUserService.findPage(user, 1, 10);
 		System.out.println(page.getRows());
 	}
+	
+	@Test
+	public void test3() {
+		//WoSysUser user = woSysUserService.findById(1);
+		//System.out.println(user);
+		WoSysUser user = woSysUserService.findOne(1);
+		System.out.println(user);
+	}
 }

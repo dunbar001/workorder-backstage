@@ -1,6 +1,7 @@
 package com.workorder.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,5 +107,13 @@ public class WoSysRoleServiceImpl implements WoSysRoleService {
 		}
 		Page<WoSysRole> page = (Page<WoSysRole>)sysRoleMapper.selectByExample(roleExample);
 		return new PageResult(page.getTotal(), page.getResult());
+	}
+	
+	/**
+	 * 获取用户组下拉框数据
+	 * @return
+	 */
+	public List<Map<String,Integer>> findRoleSelect(){
+		return sysRoleMapper.findRoleSelect();
 	}
 }

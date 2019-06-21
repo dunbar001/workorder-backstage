@@ -35,4 +35,8 @@ app.service("woRoleService",function($http){
 	this.findPermissionIdsByRid=function(roleId){
 		return $http.get('/role/findPermissionIdsByRid.do?roleId=' + roleId);
 	}
+	//获取用户组下拉框数据
+	this.findRoleSelect=function(){
+		return $http.get('/role/findRoleSelect.do?');
+	}
 })

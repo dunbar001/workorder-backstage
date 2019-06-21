@@ -1,4 +1,4 @@
-app.controller("woUserController",function($scope,$controller,woUserService){
+app.controller("woUserController",function($scope,$controller,woUserService,woRoleService){
 	
 	$controller("baseController",{$scope:$scope});
 	
@@ -88,5 +88,15 @@ app.controller("woUserController",function($scope,$controller,woUserService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
+	}
+	
+	$scope.genderList = [{text:"男",value:"男"},{text:"女",value:"女"}];
+	
+	$scope.findRoleSelect=function(){
+		woRoleService.findRoleSelect().success(
+				function(res){
+					$scope.roleSelect = res;
+				}
+		)
 	}
 })

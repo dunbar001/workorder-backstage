@@ -3,6 +3,7 @@ package com.workorder.service.impl;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,5 +42,13 @@ public class WoSysRoleServiceImplTest {
 		role.setName("管理员");
 		PageResult pageResult = woSysRoleService.findPage(role, 1, 10);
 		System.out.println(pageResult.getRows());
+	}
+	
+	@Test
+	public void test3() {
+		//List<WoSysRole> list = woSysRoleService.findRoleListByUrl("/user/add.do");
+		//System.out.println(list.get(0).getKey());
+		List<Map<String,Integer>> list = woSysRoleService.findRoleSelect();
+		System.out.println(list);
 	}
 }

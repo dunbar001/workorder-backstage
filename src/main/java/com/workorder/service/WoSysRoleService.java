@@ -1,6 +1,7 @@
 package com.workorder.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.workorder.entity.PageResult;
 import com.workorder.pojo.WoSysRole;
@@ -61,4 +62,6 @@ public interface WoSysRoleService {
 	 * @return
 	 */
 	public PageResult findPage(WoSysRole role, int pageNum,int pageSize);
+	
+	public List<Map<String,Integer>> findRoleSelect();
 }

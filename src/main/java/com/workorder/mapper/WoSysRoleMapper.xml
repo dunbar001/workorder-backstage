@@ -193,4 +193,8 @@
   	wo_permission on wo_permission_role.permission_id=wo_permission.id
   	where wo_permission.url=#{url,jdbcType=VARCHAR}
   </select>
+  
+  <select id="findRoleSelect" resultType="java.util.Map">
+  	select wo_sys_role.id,wo_sys_role.name from wo_sys_role
+  </select>
 </mapper>

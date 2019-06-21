@@ -66,7 +66,7 @@ public class WoSysUserServiceImpl implements WoSysUserService {
 
 	@Override
 	public WoSysUser findOne(Integer id) {
-		return woSysUserMapper.selectByPrimaryKey(id);
+		return woSysUserMapper.findOneDetail(id);
 	}
 
 	@Override
