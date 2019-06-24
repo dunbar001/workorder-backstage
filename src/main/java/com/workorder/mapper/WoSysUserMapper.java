@@ -33,6 +33,4 @@ public interface WoSysUserMapper {
     WoSysUser findByName(String name);
     
     List<WoSysUser> findPageByWhere(WoSysUser user);
-    
-    WoSysUser findOneDetail(Integer id);
 }

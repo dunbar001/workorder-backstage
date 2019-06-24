@@ -30,4 +30,18 @@ app.controller('baseController' ,function($scope){
 		}
 	}
 	
+	$scope.checked=false;
+	//全选/反选
+	$scope.selectAll = function($event){
+		$scope.checked=$event.target.checked;
+		if($scope.checked){
+			$scope.selectIds=[];
+			$scope.list.forEach(function(item){
+				$scope.selectIds.push(item.id);
+			})
+		}else{
+			$scope.selectIds=[];
+		}
+	}
+	
 });	

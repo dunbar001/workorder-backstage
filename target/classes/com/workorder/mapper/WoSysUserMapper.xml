@@ -101,6 +101,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.workorder.pojo.WoSysUser" >
+  	<selectKey keyProperty="id" keyColumn="id" order="AFTER" resultType="java.lang.Integer">
+  		 SELECT LAST_INSERT_ID()
+  	</selectKey>
     insert into wo_sys_user (id, name, pwd, 
       enabled)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
@@ -226,8 +229,4 @@
     order by wo_user.create_time desc
   </select>
   
-  <select id="findOneDetail" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-  	select wo_sys_user.*,wo_user_role.*,wo_sys_role.id,wo_sys_role.name as role_name,wo_sys_role.role_key as roleKey,wo_user.* from wo_sys_user JOIN wo_user_role on wo_sys_user.id=wo_user_role.uid JOIN wo_sys_role ON wo_user_role.rid=wo_sys_role.id
-	JOIN wo_user ON wo_sys_user.id=wo_user.uid where wo_sys_user.id=#{id}
-  </select>
 </mapper>

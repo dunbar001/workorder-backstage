@@ -68,7 +68,7 @@ app.controller("woUserController",function($scope,$controller,woUserService,woRo
 	}
 	
 	//根据ids批量删除
-	$scope.deleteByIds=function(id){
+	$scope.deleteByIds=function(){
 		$scope.dele($scope.selectIds);
 	}
 	//根据id删除
@@ -77,6 +77,7 @@ app.controller("woUserController",function($scope,$controller,woUserService,woRo
 		arr.push(id);
 		$scope.dele(arr);
 	}
+	
 	
 	$scope.searchEntity={};//定义搜索对象 
 	

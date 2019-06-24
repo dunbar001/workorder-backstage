@@ -152,6 +152,7 @@
 		$scope.dele(arr);
 	}
 	
+	
 	$scope.searchEntity={};//定义搜索对象 
 	
 	//搜索
@@ -162,20 +163,6 @@
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
-	
-	$scope.checked=false;
-	//全选/反选
-	$scope.selectAll = function($event){
-		$scope.checked=$event.target.checked;
-		if($scope.checked){
-			$scope.selectIds=[];
-			$scope.list.forEach(function(item){
-				$scope.selectIds.push(item.id);
-			})
-		}else{
-			$scope.selectIds=[];
-		}
 	}
 	
 	//根据id删除
@@ -261,7 +248,7 @@
 	}
 	
 	//全选、反选
-	$scope.selectAll=function(e,arr){
+	$scope.selectAllPermission=function(e,arr){
 		if(e.target.checked){
 			arr.forEach(function(item,i){
 				if($scope.permissionIds.indexOf(item.id) == -1 ){

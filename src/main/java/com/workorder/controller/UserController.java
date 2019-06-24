@@ -65,6 +65,7 @@ public class UserController {
 	@RequestMapping("/update")
 	public Result update(@RequestBody WoSysUser user){
 		try {
+			System.out.println("修改实体：" + user);
 			sysUserService.update(user);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
